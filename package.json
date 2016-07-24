@@ -1,0 +1,33 @@
+{
+  "name": "webpack-workshop",
+  "version": "1.0.0",
+  "description": "webpack workshop starter",
+  "main": "dist/index.js",
+  "dependencies": {
+    "webpack": "1.13.1",
+    "angular": "1.5.8",
+    "babel-core": "6.11.4",
+    "babel-loader": "6.2.4"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "6.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack:watch": "webpack -w",
+    "python:server": "python -m SimpleHTTPServer 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfenstermaker/webpack-workshop.git"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "dfenstermaker <dannyfenstermaker@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dfenstermaker/webpack-workshop/issues"
+  },
+  "homepage": "https://github.com/dfenstermaker/webpack-workshop#readme"
+}
