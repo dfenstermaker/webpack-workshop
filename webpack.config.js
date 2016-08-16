@@ -1,8 +1,18 @@
+var commonsChunkPlugin = CommonsChunkPlugin = require( "webpack/lib/optimize/CommonsChunkPlugin" ),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
 
     entry: {
         index: ['./src/index.js'],
-        styles: ['./src/main.css']
+        styles: ['./src/main.css'],
+        vendors: [
+            'lodash'
+        ]
+    },
+
+    externals: {
+        'angular': 'angular'
     },
 
     output: {
@@ -35,5 +45,15 @@ module.exports = {
             }
 
         ]
-    }
+    },
+
+    plugins: [
+        new CommonsChunkPlugin( "vendors", "vendors.js" ),
+        new HtmlWebpackPlugin({
+            title: 'Webpack',
+            template: 'index.ejs',
+            filename: 'index.html',
+            inject: 'true'
+        })
+    ]
 }
