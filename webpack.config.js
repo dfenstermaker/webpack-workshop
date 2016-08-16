@@ -1,7 +1,8 @@
 module.exports = {
 
     entry: {
-        index: ['./src/index.js']
+        index: ['./src/index.js'],
+        styles: ['./src/main.css']
     },
 
     output: {
@@ -11,6 +12,7 @@ module.exports = {
 
     module: {
         loaders: [
+
             {
                 test: /\.js$/,
                 exclude: [/node_modules/],
@@ -18,7 +20,20 @@ module.exports = {
                  query: {
                     presets: ['es2015']
                 }
+            },
+
+            {
+                test: /\.css$/,
+                exclude: [/node_modules/],
+                loader: "style!css"
+            },
+
+            {
+                test: /\.html$/,
+                exclude: [/node_modules/],
+                loader: "html"
             }
+
         ]
     }
 }
