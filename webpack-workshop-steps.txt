@@ -1,0 +1,89 @@
+import webpack commons chunk plugin
+    - CommonsChunkPlugin = require( "webpack/lib/optimize/CommonsChunkPlugin" )
+    - create your vendors entry point
+    - create plugins property
+    - install plugin new CommonsChunkPlugin( "vendors", "vendors.js" )
+    - add moment and lodash
+    - create script tag to pull in libs
+
+    ** vendors needs to go before your main file in the scripts since there is now a dependency
+
+
+
+import html-webpack-plugin
+    - HtmlWebpackPlugin = require('html-webpack-plugin')
+    - new HtmlWebpackPlugin({
+            title: 'Webpack',
+            template: 'index.ejs',
+            filename: 'index.html',
+            inject: 'true'
+        })
+    - remove old scripts
+    - change file type to index.ejs
+    - replace title with  <title><%= htmlWebpackPlugin.options.title %></title>
+    - change python server to serve from dist :)
+
+webpack-dev-server
+    - create file webpack.server.js
+    - require the following
+
+        var server  = require('webpack-dev-server'),
+            config  = require('./webpack.config.js'),
+            path    = require('path'),
+            webpack = require('webpack'),
+            _       = require('lodash');
+
+    - change config for dev
+        ** this is because this is a development server only and the config is used for
+           prod and dev
+
+        ** _.extend combine the two objects giving preference to the right side
+        var devConfig = _.extend(config, {
+            watch: true,
+            port: 8000
+        })
+
+    - compile the template with webpack var compiler = webpack(devConfig);
+
+    - create the server webserver = new server(compiler, {
+                            stats: {colors: true}
+                        });
+        ** colors true simply makes the out fromt he server pretty
+
+    - create a route to serve our html since its not at the root anymore
+
+        ** __dirname is a node environment variable telling you your current directory
+        ** path simply resolves file paths
+
+        webserver.use('/', function(req, res) {
+          res.sendFile(path.join( __dirname + "/dist/index.html"));
+        })
+
+    - have the server listen
+
+        webserver.listen(devConfig.port, '0.0.0.0', function () {});
+
+        console.log('Running on port ' + devConfig.port);
+
+    - run nod webpack.server.js
+
+Now lets turbo charge this thing!
+
+ - add this to your index.ejs <script src="http://localhost:8000/webpack-dev-server.js"></script>
+    ** webpack-dev-server.js is a virtual file created at runtime by the webpack dev server
+
+- delete your dist folder
+
+- restart webpack.server.js
+
+    ** notice there are no files written to dist!
+
+
+
+
+
+
+
+
+
+    - use [hash]
